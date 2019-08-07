@@ -28,13 +28,15 @@ if(isset($_GET["signout"])){
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <title>Document</title>
     <style>
         th, td {
             border-bottom: 1px solid #ddd;
         }
+        body {font: 120% "Trebuchet MS", sans-serif; margin: 70px;margin-top: 45px;}
     </style>
 </head>
-    <h1>SHOP</h1>
-    <p>Hello!<?= $userName." | ".$sign; ?></p>
+    <h1>-SHOP-</h1>
+    <p>Hello! <?= $userName." | ".$sign; ?></p>
     <hr>

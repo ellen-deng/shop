@@ -1,7 +1,7 @@
 <?php 
 require("head.php");
 
-$sqlCommand = "select * from product where id=".$_GET["p_id"];
+$sqlCommand = "select * from product where p_id=".$_GET["p_id"];
 $result = mysqli_query($link, $sqlCommand);
 $row = mysqli_fetch_assoc($result);
 
@@ -34,27 +34,25 @@ if(isset($_POST["btnAddCar"])){
 ?>
 
 <body>
-<form method="post" action="">
-        
-        <table width="80%" border="0" >                  
+    <form method="post" action="">
+            
+            <table width="80%" border="0" > 
             <tr>
-                <td align="center"><img width="100" src="img/<?= $row['picture']; ?>"></td>
-                <td>
+                <td rowspan="2" align="center"><img width="45%" src="img/<?= $row['picture']; ?>"></td>
+                <td align="">
                     <input type="hidden" name="p_id" value="<?= $_GET["p_id"]; ?>">
                     <h4><?= $row["name"]; ?></h4>
                     <p><?= $row['info']; ?></p> 
-                    <span class="ui-li-count"><?= "$".$row['price']; ?></span>		
+                    <span class="ui-li-count"><?= "$".$row['price']; ?></span>	
                 </td>
-                <td>
-                    <select name="qty">
-                    <?php $qty = $row['qty'];if($row['qty']>10){$qty = 10;}
-                     for($i = 1; $i<=$qty; $i++){ ?>
-                    　<option value="<?=$i ?>"><?= $i; ?></option>
-                    <?php } ?>
-                    </select>
+            </tr>
+            <tr>        
+                <td align="">
+                <input type="number" min="0" max="<?= $row['p_qty'] ?>" step="1" value="1">
+                <br>
+                <input type=submit name="btnAddCar" value="加入購物車" >
                 </td>
-                <td><input type=submit name="btnAddCar" value="加入購物車" ></td>
-            </tr>               
+            </tr>                         
         </table>
     </form
 </body>

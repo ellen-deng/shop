@@ -1,7 +1,7 @@
 <?php
 require("head.php");
 
-$sqlCommand = "select * from car c join product p on c.p_id=p.p_id where u_id=".$_SESSION['u_id'] ;
+$sqlCommand = "select * from car c join product p on c.p_id=p.p_id where c.u_id=".$_SESSION['u_id'] ;
 $result = mysqli_query($link, $sqlCommand);
 $row = mysqli_fetch_assoc($result);
 ?>
@@ -18,18 +18,15 @@ $row = mysqli_fetch_assoc($result);
                 <p><?= $row['info']; ?></p> 
                 <span class="ui-li-count"><?= "$".$row['price']; ?></span>		
             </td>
-            <td>
-                <select name="qty_<?= $row['id'] ?>">
-                <?php $qty = $row['qty'];if($row['qty']>10){$qty = 10;}
-                    for($i = 1; $i<=$qty; $i++){ ?>
-                　<option value="<?=$i ?>"><?= $i; ?></option>
-                <?php } ?>
-                </select>
-            </td>
-            <td><input type=submit name="btnAddCar" value="加入購物車" onclick="location='index.php?p_id=<?= $row['id'] ?>';"></td>
+            <td align="" colspan="2">
+                <input type="number" min="0" max="<?= $row['p_qty'] ?>" step="1" value="<?= $row['c_qty'] ?>">
+            </td>    
+                       
         </tr>
     <?php }while($row = mysqli_fetch_assoc($result)) ?>
-    
+
+    <tr><td align="right" colspan="4"><input type=submit name="btnUpdCar" value="變更數量" onclick=""></td></tr>
+    <tr><td></td><td align="right"></td><td align="" colspan=""> $ 100</td><td align="right"><input type=submit name="btnUpdCar" value="結帳" onclick=""></td></tr>
     </table>
 </form>
 </body>
