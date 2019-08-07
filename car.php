@@ -1,25 +1,11 @@
 <?php
 require("head.php");
 
-// if(isset($_POST["btnAddCar"])){
-//     $sqlCommand = "INSERT INTO `car`( `p_id`, `u_id`, `qty`) VALUES ()";
-//     $result = mysqli_query($link, $sqlCommand);
-    
-// }
-
-// if(isset($_GET["p_id"])){
-//     echo $p_id = $_GET["p_id"];
-//     echo $qty = $_POST['qty_'.$p_id];
-    // $sqlCommand = "INSERT INTO `car`( `p_id`, `u_id`, `qty`) VALUES ()";
-    // $result = mysqli_query($link, $sqlCommand);
-    
-//}
-
-$sqlCommand = "select * from product";
+$sqlCommand = "select * from car where u_id=".$_SESSION['u_id']." group by p_id ";
 $result = mysqli_query($link, $sqlCommand);
 $row = mysqli_fetch_assoc($result);
-
 ?>
+
 <body> 
 <form method="post" action="">
     <table width="70%" border="0" >
