@@ -1,7 +1,7 @@
 <?php
 require("head.php");
 
-$sqlCommand = "select * from car where u_id=".$_SESSION['u_id']." group by p_id ";
+$sqlCommand = "select * from car c join product p on c.p_id=p.p_id where u_id=".$_SESSION['u_id'] ;
 $result = mysqli_query($link, $sqlCommand);
 $row = mysqli_fetch_assoc($result);
 ?>
@@ -14,7 +14,7 @@ $row = mysqli_fetch_assoc($result);
         <tr>
             <td align="center"><img width="100" src="img/<?= $row['picture']; ?>"></td>
             <td>
-                <h4><a href="productDetails.php?p_id=<?= $row['id'] ?>"><?= $row["name"]; ?></a></h4>
+                <h4><?= $row["name"]; ?></h4>
                 <p><?= $row['info']; ?></p> 
                 <span class="ui-li-count"><?= "$".$row['price']; ?></span>		
             </td>

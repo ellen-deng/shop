@@ -11,9 +11,11 @@ if(isset($_POST["btnAddCar"])){
     $qty = $_POST['qty'];
 
     $same_p = false;
-    while($carRow = mysqli_num_rows($CarResult)){
+    while($carRow = mysqli_fetch_assoc($CarResult)){
+        echo 1;
         if($carRow["p_id"]==$p_id){
-            $same_p = ture;
+            echo 2;
+            $same_p = true;
             $car_id = $carRow["car_id"];
             $car_qty = $carRow["qty"];
         }
@@ -34,7 +36,7 @@ if(isset($_POST["btnAddCar"])){
 <body>
 <form method="post" action="">
         
-        <table width="70%" border="0" >                  
+        <table width="80%" border="0" >                  
             <tr>
                 <td align="center"><img width="100" src="img/<?= $row['picture']; ?>"></td>
                 <td>

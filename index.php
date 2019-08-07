@@ -22,7 +22,7 @@ $row = mysqli_fetch_assoc($result);
 ?>
 <body> 
 <form method="post" action="">
-    <table width="70%" border="0" >
+    <table  width="80%" border="0" >
     
         <?php do{ ?>
         <tr>
