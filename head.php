@@ -1,7 +1,7 @@
 <?php
 require("config.php");
 $userName = "Guest";
-$sign = '<a href="login.php">登入</a>';
+$sign = '<a href="login.php">Login</a>';
 
 if(isset($_SESSION["u_id"])){
     
@@ -10,8 +10,8 @@ if(isset($_SESSION["u_id"])){
     $carCount = mysqli_num_rows($CarResult);
 
     $userName = $_SESSION["name"];
-    $sign = '<a href="index.php">首頁</a> | <a href="car.php">購物車</a> ('.$carCount.') | 
-        <a href="index.php?signout=1">登出</a>';
+    $sign = '<a href="index.php">Home</a> | <a href="car.php">Car</a> ('.$carCount.') | 
+        <a href="index.php?signout=1">Logout</a>';
 
 }
 

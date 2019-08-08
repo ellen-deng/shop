@@ -6,31 +6,34 @@ $result = mysqli_query($link, $sqlCommand);
 $row = mysqli_fetch_assoc($result);
 
 if(isset($_POST["btnAddCar"])){
-    echo $u_id = $_SESSION["u_id"];
-    echo $p_id = $_REQUEST["p_id"];
-    echo $qty = $_POST['qty'];
+    $p_id = $_REQUEST["p_id"];
 
-    $same_p = false;
-    while($carRow = mysqli_fetch_assoc($CarResult)){
-        echo 1;
-        if($carRow["p_id"]==$p_id){
-            echo 2;
-            $same_p = true;
-            $car_id = $carRow["car_id"];
-            $car_qty = $carRow["c_qty"];
+    if(isset($_SESSION["u_id"])){
+        $u_id = $_SESSION["u_id"];       
+        $qty = $_POST['qty'];
+
+        $same_p = false;
+        while($carRow = mysqli_fetch_assoc($CarResult)){        
+            if($carRow["p_id"]==$p_id){            
+                $same_p = true;
+                $car_id = $carRow["car_id"];
+                $car_qty = $carRow["c_qty"];
+            }
         }
-    }
 
-    if($same_p){
-        $qty += $car_qty;
-        $sqlCommand = "UPDATE `car` SET `c_qty`=$qty WHERE car_id=$car_id";
-    }else{
-        $sqlCommand = "INSERT INTO `car`( `p_id`, `u_id`, `c_qty`) VALUES ($p_id, $u_id, $qty)";      
-    }$result = mysqli_query($link, $sqlCommand);
+        if($same_p){
+            $qty += $car_qty;
+            $sqlCommand = "UPDATE `car` SET `c_qty`=$qty WHERE car_id=$car_id";
+        }else{
+            $sqlCommand = "INSERT INTO `car`( `p_id`, `u_id`, `c_qty`) VALUES ($p_id, $u_id, $qty)";      
+        }$result = mysqli_query($link, $sqlCommand);
 
-    if($result){
-        header("location: productDetails.php?p_id=$p_id");
-    }
+        if($result){
+            header("location: productDetails.php?p_id=$p_id");
+        }
+    }else{ header("location: login.php?p_id=$p_id&backTo=productDetails.php");exit();}
+        
+    
 
 }
 ?>

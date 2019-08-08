@@ -12,19 +12,20 @@ $row = mysqli_fetch_assoc($result);
     
         <?php do{ ?>
         <tr>
-            <td align="center"><img width="100" src="img/<?= $row['picture']; ?>"></td>
-            <td>
+            <td align="center" ><img width="130" src="img/<?= $row['picture']; ?>"></td>
+            <td >
                 <h4><a href="productDetails.php?p_id=<?= $row['p_id'] ?>"><?= $row["name"]; ?></a></h4>
                 <p><?= $row['info']; ?></p> 
-                <span class="ui-li-count"><?= "$".$row['price']; ?></span>		
+                <p><?= "$".$row['price']; ?></p>		
             </td>
             <td>
-                <select name="qty_<?= $row['id'] ?>" id="qty_<?= $row['id'] ?>">
+                <input type="number" name="qty" min="0" max="<?= $row['p_qty'] ?>" step="1" value="1">
+                <!--<select name="qty_<?= $row['id'] ?>" id="qty_<?= $row['id'] ?>">
                 <?php $qty = $row['p_qty'];if($row['p_qty']>10){$qty = 10;}
                     for($i = 1; $i<=$qty; $i++){ ?>
                 　<option value="<?=$i ?>"><?= $i; ?></option>
                 <?php } ?>
-                </select>
+                </select>-->
             </td>
             <td><input type=submit name="btnAddCar" value="加入購物車" onclick="addCar(qty_<?= $row['id'] ?>)"></td>
         </tr>

@@ -8,9 +8,10 @@ if(isset($_POST["btnHome"])){
 
 if(isset($_POST["btnLogin"])){
 
-    echo $mail = $_POST["mail"];
+    $mail = $_POST["mail"];
+    $psw = md5($_POST["psw"]);
 
-    $sqlCommand = "select * from member where mail = '$mail'";
+    $sqlCommand = "select * from member where mail = '$mail' and password = '$psw'";
     $result = mysqli_query($link, $sqlCommand);
     $row = mysqli_fetch_assoc($result);
     $row_count = mysqli_num_rows($result);
@@ -18,8 +19,15 @@ if(isset($_POST["btnLogin"])){
     if($row_count != 0){
         $_SESSION["u_id"] = $row["user_id"];
         $_SESSION["name"] = $row["name"];
-        header("location: index.php");
-        exit();
+        
+        if(isset($_GET["backTo"])){
+            echo $_GET["backTo"],$_GET["p_id"];
+            header("location: ".$_GET["backTo"]."?p_id=".$_GET["p_id"]);
+          }else{
+            header("location: index.php");
+          }exit();
+          
+       
     }
 
 
