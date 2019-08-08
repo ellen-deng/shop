@@ -6,9 +6,9 @@ $result = mysqli_query($link, $sqlCommand);
 $row = mysqli_fetch_assoc($result);
 
 if(isset($_POST["btnAddCar"])){
-    $u_id = $_SESSION["u_id"];
-    $p_id = $_POST["p_id"];
-    $qty = $_POST['qty'];
+    echo $u_id = $_SESSION["u_id"];
+    echo $p_id = $_REQUEST["p_id"];
+    echo $qty = $_POST['qty'];
 
     $same_p = false;
     while($carRow = mysqli_fetch_assoc($CarResult)){
@@ -17,18 +17,20 @@ if(isset($_POST["btnAddCar"])){
             echo 2;
             $same_p = true;
             $car_id = $carRow["car_id"];
-            $car_qty = $carRow["qty"];
+            $car_qty = $carRow["c_qty"];
         }
     }
 
     if($same_p){
         $qty += $car_qty;
-        $sqlCommand = "UPDATE `car` SET `qty`=$qty WHERE car_id=$car_id";
+        $sqlCommand = "UPDATE `car` SET `c_qty`=$qty WHERE car_id=$car_id";
     }else{
-        $sqlCommand = "INSERT INTO `car`( `p_id`, `u_id`, `qty`) VALUES ($p_id, $u_id, $qty)";      
+        $sqlCommand = "INSERT INTO `car`( `p_id`, `u_id`, `c_qty`) VALUES ($p_id, $u_id, $qty)";      
     }$result = mysqli_query($link, $sqlCommand);
 
-    
+    if($result){
+        header("location: productDetails.php?p_id=$p_id");
+    }
 
 }
 ?>
@@ -48,7 +50,7 @@ if(isset($_POST["btnAddCar"])){
             </tr>
             <tr>        
                 <td align="">
-                <input type="number" min="0" max="<?= $row['p_qty'] ?>" step="1" value="1">
+                <input type="number" name="qty" min="0" max="<?= $row['p_qty'] ?>" step="1" value="1">
                 <br>
                 <input type=submit name="btnAddCar" value="加入購物車" >
                 </td>

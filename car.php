@@ -4,6 +4,7 @@ require("head.php");
 $sqlCommand = "select * from car c join product p on c.p_id=p.p_id where c.u_id=".$_SESSION['u_id'] ;
 $result = mysqli_query($link, $sqlCommand);
 $row = mysqli_fetch_assoc($result);
+$total = $row[""];
 ?>
 
 <body> 
