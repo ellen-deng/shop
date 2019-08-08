@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2019 年 08 月 08 日 01:35
+-- 產生時間： 2019 年 08 月 09 日 00:34
 -- 伺服器版本： 10.3.16-MariaDB
 -- PHP 版本： 7.1.30
 
@@ -43,7 +43,8 @@ CREATE TABLE `car` (
 
 INSERT INTO `car` (`car_id`, `p_id`, `u_id`, `c_qty`) VALUES
 (19, 2, 1, 8),
-(20, 1, 1, 13);
+(20, 1, 1, 5),
+(21, 3, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -55,7 +56,7 @@ CREATE TABLE `member` (
   `user_id` int(15) NOT NULL,
   `mail` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `name` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(15) COLLATE utf8_unicode_ci NOT NULL,
+  `password` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
   `sex` varchar(5) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -64,7 +65,7 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`user_id`, `mail`, `name`, `password`, `sex`) VALUES
-(1, 'ellendeng@gmail.com', 'ellen', '', 'girl');
+(1, 'ellendeng@gmail.com', 'ellen', '81dc9bdb52d04dc20036dbd8313ed055', 'girl');
 
 -- --------------------------------------------------------
 
@@ -126,7 +127,7 @@ ALTER TABLE `product`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `car`
 --
 ALTER TABLE `car`
-  MODIFY `car_id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `car_id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `member`
