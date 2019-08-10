@@ -3,7 +3,7 @@ require("config.php");
 
 if(isset($_POST["btnHome"])){
     header("location: index.php");
-    //exit();
+    exit();
 }
 
 if(isset($_POST["btnLogin"])){
@@ -11,14 +11,14 @@ if(isset($_POST["btnLogin"])){
     $mail = $_POST["mail"];
     $psw = md5($_POST["psw"]);
 
-    $result = $db->query("select * from member where mail = '$mail' and password = '$psw'");
+    $result = $db->prepare("select * from member where mail = :mail and password = :psw");
+    $result->bindParam(':mail',$mail,PDO::PARAM_STR,20);
+    $result->bindParam(':psw',$psw);
+    $result->execute();
+
     $row = $result->fetch();
     $row_count = $result->rowCount();
-
-    // $sqlCommand = "select * from member where mail = '$mail' and password = '$psw'";
-    // $result = mysqli_query($link, $sqlCommand);
-    // $row = mysqli_fetch_assoc($result);
-    // $row_count = mysqli_num_rows($result);
+    
 
     if($row_count != 0){
         $_SESSION["u_id"] = $row["user_id"];
@@ -33,9 +33,6 @@ if(isset($_POST["btnLogin"])){
           
        
     }
-
-
-
 }
 
 
