@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2019 年 08 月 09 日 00:34
+-- 產生時間： 2019 年 08 月 10 日 21:26
 -- 伺服器版本： 10.3.16-MariaDB
 -- PHP 版本： 7.1.30
 
@@ -42,9 +42,12 @@ CREATE TABLE `car` (
 --
 
 INSERT INTO `car` (`car_id`, `p_id`, `u_id`, `c_qty`) VALUES
-(19, 2, 1, 8),
-(20, 1, 1, 5),
-(21, 3, 1, 1);
+(27, 3, 1, 1),
+(28, 5, 2, 2),
+(30, 1, 1, 8),
+(31, 5, 1, 1),
+(32, 4, 2, 3),
+(33, 1, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -65,7 +68,8 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`user_id`, `mail`, `name`, `password`, `sex`) VALUES
-(1, 'ellendeng@gmail.com', 'ellen', '81dc9bdb52d04dc20036dbd8313ed055', 'girl');
+(1, 'ellendeng@gmail.com', 'ellen', '81dc9bdb52d04dc20036dbd8313ed055', 'girl'),
+(2, 'max@gmail.com', 'max', '81dc9bdb52d04dc20036dbd8313ed055', 'boy');
 
 -- --------------------------------------------------------
 
@@ -127,13 +131,13 @@ ALTER TABLE `product`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `car`
 --
 ALTER TABLE `car`
-  MODIFY `car_id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `car_id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `member`
 --
 ALTER TABLE `member`
-  MODIFY `user_id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `user_id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `product`
