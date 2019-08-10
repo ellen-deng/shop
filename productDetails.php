@@ -3,9 +3,6 @@ require("head.php");
 
 $result = $db->query("select * from product where p_id=".$_GET["p_id"]);
 $row = $result->fetch();
-// $sqlCommand = "select * from product where p_id=".$_GET["p_id"];
-// $result = mysqli_query($link, $sqlCommand);
-// $row = mysqli_fetch_assoc($result);
 
 if(isset($_POST["btnAddCar"])){
     $p_id = $_REQUEST["p_id"];
@@ -27,26 +24,17 @@ if(isset($_POST["btnAddCar"])){
             $qty += $car_qty;
             $result = $db->query("UPDATE `car` SET `c_qty`=$qty WHERE car_id=$car_id");
             header("location: productDetails.php?p_id=$p_id");
-            //$sqlCommand = "UPDATE `car` SET `c_qty`=$qty WHERE car_id=$car_id";
         }else{
             $result = $db->query("INSERT INTO `car`( `p_id`, `u_id`, `c_qty`) VALUES ($p_id, $u_id, $qty)");
             header("location: productDetails.php?p_id=$p_id");
-            //$sqlCommand = "INSERT INTO `car`( `p_id`, `u_id`, `c_qty`) VALUES ($p_id, $u_id, $qty)";      
-        }//$result = mysqli_query($link, $sqlCommand);
-
-        // if($result){
-        //     header("location: productDetails.php?p_id=$p_id");
-        // }
+         }
+       
     }else{ header("location: login.php?p_id=$p_id&backTo=productDetails.php");exit();}
-        
-    
-
 }
 ?>
 
 <body>
-    <form method="post" action="">
-            
+    <form method="post" action="">            
             <table width="80%" border="0" > 
             <tr>
                 <td rowspan="2" align="center"><img width="45%" src="img/<?= $row['picture']; ?>"></td>
@@ -65,6 +53,6 @@ if(isset($_POST["btnAddCar"])){
                 </td>
             </tr>                         
         </table>
-    </form
+    </form>
 </body>
 </html>

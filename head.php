@@ -8,9 +8,6 @@ if(isset($_SESSION["u_id"])){
     $CarResult = $db->query("select * from car where u_id=".$_SESSION['u_id']);
     $CarRow = $CarResult->fetch();
     $carCount = $CarResult->rowCount();
-    // $sqlCar = "select * from car where u_id=".$_SESSION['u_id'];
-    // $CarResult = mysqli_query($link, $sqlCar);
-    // @$carCount = mysqli_num_rows($CarResult);
 
     $userName = $_SESSION["name"];
     $sign = '<a href="index.php">Home</a> | <a href="car.php">Car</a> ('.$carCount.') | 
