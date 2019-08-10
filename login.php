@@ -11,10 +11,14 @@ if(isset($_POST["btnLogin"])){
     $mail = $_POST["mail"];
     $psw = md5($_POST["psw"]);
 
-    $sqlCommand = "select * from member where mail = '$mail' and password = '$psw'";
-    $result = mysqli_query($link, $sqlCommand);
-    $row = mysqli_fetch_assoc($result);
-    $row_count = mysqli_num_rows($result);
+    $result = $db->query("select * from member where mail = '$mail' and password = '$psw'");
+    $row = $result->fetch();
+    $row_count = $result->rowCount();
+
+    // $sqlCommand = "select * from member where mail = '$mail' and password = '$psw'";
+    // $result = mysqli_query($link, $sqlCommand);
+    // $row = mysqli_fetch_assoc($result);
+    // $row_count = mysqli_num_rows($result);
 
     if($row_count != 0){
         $_SESSION["u_id"] = $row["user_id"];

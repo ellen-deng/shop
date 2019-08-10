@@ -1,9 +1,11 @@
 <?php 
 require("head.php");
 
-$sqlCommand = "select * from product where p_id=".$_GET["p_id"];
-$result = mysqli_query($link, $sqlCommand);
-$row = mysqli_fetch_assoc($result);
+$result = $db->query("select * from product where p_id=".$_GET["p_id"]);
+$row = $result->fetch();
+// $sqlCommand = "select * from product where p_id=".$_GET["p_id"];
+// $result = mysqli_query($link, $sqlCommand);
+// $row = mysqli_fetch_assoc($result);
 
 if(isset($_POST["btnAddCar"])){
     $p_id = $_REQUEST["p_id"];
@@ -13,24 +15,28 @@ if(isset($_POST["btnAddCar"])){
         $qty = $_POST['qty'];
 
         $same_p = false;
-        while($carRow = mysqli_fetch_assoc($CarResult)){        
-            if($carRow["p_id"]==$p_id){            
-                $same_p = true;
-                $car_id = $carRow["car_id"];
-                $car_qty = $carRow["c_qty"];
+        while($CarRow = $CarResult->fetch()){        
+            if($CarRow["p_id"]==$p_id){            
+                echo $same_p = true;
+                $car_id = $CarRow["car_id"];
+                $car_qty = $CarRow["c_qty"];
             }
         }
 
         if($same_p){
             $qty += $car_qty;
-            $sqlCommand = "UPDATE `car` SET `c_qty`=$qty WHERE car_id=$car_id";
-        }else{
-            $sqlCommand = "INSERT INTO `car`( `p_id`, `u_id`, `c_qty`) VALUES ($p_id, $u_id, $qty)";      
-        }$result = mysqli_query($link, $sqlCommand);
-
-        if($result){
+            $result = $db->query("UPDATE `car` SET `c_qty`=$qty WHERE car_id=$car_id");
             header("location: productDetails.php?p_id=$p_id");
-        }
+            //$sqlCommand = "UPDATE `car` SET `c_qty`=$qty WHERE car_id=$car_id";
+        }else{
+            $result = $db->query("INSERT INTO `car`( `p_id`, `u_id`, `c_qty`) VALUES ($p_id, $u_id, $qty)");
+            header("location: productDetails.php?p_id=$p_id");
+            //$sqlCommand = "INSERT INTO `car`( `p_id`, `u_id`, `c_qty`) VALUES ($p_id, $u_id, $qty)";      
+        }//$result = mysqli_query($link, $sqlCommand);
+
+        // if($result){
+        //     header("location: productDetails.php?p_id=$p_id");
+        // }
     }else{ header("location: login.php?p_id=$p_id&backTo=productDetails.php");exit();}
         
     
